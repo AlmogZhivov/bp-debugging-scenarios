@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Interactive collection of behavioral programming debugging scenarios for research feedback."
+    >
+    <title>Behavioral Programming Debugging Scenarios</title>
+    <link rel="preload" href="assets/bp-debugging-hero.png" as="image">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="#intro" aria-label="Behavioral Programming Debugging Scenarios home">
+        <span class="brand-mark" aria-hidden="true">BP</span>
+        <span>Debugging Scenarios</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#intro">Intro</a>
+        <a href="#scenarios">Scenarios</a>
+        <a href="mailto:almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com?subject=Additional%20BP%20debugging%20scenario">Send a bug</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="intro-view" class="view is-active" aria-labelledby="intro-title">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Research collaboration request</p>
+            <h1 id="intro-title">Debugging scenarios in Behavioral Programming</h1>
+            <p class="lede">
+              We are collecting representative bugs in Behavioral Programming programs to improve
+              and evaluate an LLM-agent based workflow for debugging BP models.
+            </p>
+            <p>
+              The four examples below are candidate bug patterns we found so far. We would
+              appreciate additional scenarios, variants, edge cases, and examples from people
+              familiar with BP.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#scenarios">Review the scenarios</a>
+              <a class="button secondary" href="mailto:almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com?subject=Additional%20BP%20debugging%20scenario">Email us a bug</a>
+            </div>
+          </div>
+          <div class="hero-visual" role="img" aria-label="Abstract visualization of code, event traces, and debugging workflow"></div>
+        </div>
+
+        <section class="info-band" aria-labelledby="task-title">
+          <div>
+            <p class="section-label">The task</p>
+            <h2 id="task-title">Help us expand the bug collection</h2>
+          </div>
+          <div class="info-grid">
+            <article>
+              <h3>What to send</h3>
+              <p>
+                Any BP debugging scenario in free form: code, explanation, expected behavior,
+                wrong traces, screenshots, diagrams, images, or short notes.
+              </p>
+            </article>
+            <article>
+              <h3>Timing</h3>
+              <p>
+                We plan to keep this collection phase open for two weeks. A reminder will be sent
+                after about a week and a half.
+              </p>
+            </article>
+            <article>
+              <h3>Goal</h3>
+              <p>
+                The goal is to build a higher-quality benchmark of BP bugs for evaluating debugging
+                methods, explanations, and LLM-agent repair workflows.
+              </p>
+            </article>
+            <article>
+              <h3>Methodology</h3>
+              <p>
+                Our methodology studies how agentic LLM workflows inspect BP event traces, reason
+                about synchronization behavior, explain faults, and propose repairs.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="acknowledgements" aria-labelledby="ack-title">
+          <div class="ack-copy">
+            <p class="section-label">Acknowledgments</p>
+            <h2 id="ack-title">Thank you for helping shape the benchmark</h2>
+            <p>
+              We thank the BP community, researchers, lecturers, and practitioners who review these
+              examples and contribute additional bugs. Your feedback will help make the resulting
+              dataset more realistic and useful.
+            </p>
+          </div>
+          <address class="contact-card">
+            <a href="mailto:almogzh@post.bgu.ac.il">almogzh@post.bgu.ac.il</a>
+            <a href="mailto:achiya@bgu.ac.il">achiya@bgu.ac.il</a>
+            <a href="mailto:gera.weiss@gmail.com">gera.weiss@gmail.com</a>
+          </address>
+        </section>
+      </section>
+
+      <section id="scenarios-view" class="view" aria-labelledby="scenario-list-title">
+        <div class="page-shell">
+          <div class="screen-heading">
+            <p class="eyebrow">Candidate bug patterns</p>
+            <h1 id="scenario-list-title">Choose a scenario to inspect</h1>
+            <p>
+              Each screen contains the problem name, incorrect BP-style JavaScript, an explanation,
+              and a wrong trace that illustrates the failure.
+            </p>
+          </div>
+          <div id="scenario-grid" class="scenario-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="detail-view" class="view" aria-live="polite"></section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Behavioral Programming Debugging Scenarios</span>
+      <span>June 2026</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
