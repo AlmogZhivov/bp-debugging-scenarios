@@ -218,7 +218,7 @@ function renderDetail(scenario) {
         </div>
         <div class="detail-meta" aria-label="Scenario metadata">
           <div class="meta-pill">${escapeHtml(scenario.requirement)}</div>
-          <a class="button secondary" href="mailto:almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com?subject=Feedback%20on%20${encodeURIComponent(scenario.shortTitle)}">Send feedback on this scenario</a>
+          <a class="button secondary contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Feedback%20on%20${encodeURIComponent(scenario.shortTitle)}" target="_blank" rel="noopener">Send feedback on this scenario</a>
         </div>
       </div>
 
@@ -292,4 +292,13 @@ function route() {
 
 renderScenarioGrid();
 window.addEventListener("hashchange", route);
+document.addEventListener("click", (event) => {
+  const link = event.target.closest(".contact-link");
+  if (!link) {
+    return;
+  }
+
+  event.preventDefault();
+  window.open(link.href, "_blank", "noopener");
+});
 route();
