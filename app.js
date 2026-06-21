@@ -212,13 +212,13 @@ function renderDetail(scenario) {
       <a class="back-link" href="#scenarios">Back to scenarios</a>
       <div class="detail-hero">
         <div>
-          <p class="eyebrow">Bug pattern</p>
+          <p class="eyebrow">Bug type</p>
           <h1>${escapeHtml(scenario.title)}</h1>
           <p class="lede">${escapeHtml(scenario.summary)}</p>
         </div>
         <div class="detail-meta" aria-label="Scenario metadata">
           <div class="meta-pill">${escapeHtml(scenario.requirement)}</div>
-          <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Feedback%20on%20${encodeURIComponent(scenario.shortTitle)}">Send feedback on this scenario</button>
+          <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Feedback%20on%20${encodeURIComponent(scenario.shortTitle)}">Send feedback on this type</button>
         </div>
       </div>
 

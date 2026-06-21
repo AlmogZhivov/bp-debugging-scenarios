@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Interactive collection of behavioral programming debugging scenarios for research feedback."
+      content="Interactive collection of Behavioral Programming bug types for research feedback."
     >
     <title>Behavioral Programming Debugging Scenarios</title>
     <link rel="preload" href="assets/bp-debugging-hero.png" as="image">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -20,7 +20,7 @@
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="#intro">Intro</a>
         <a href="#scenarios">Scenarios</a>
-        <button class="nav-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Additional%20BP%20debugging%20scenario">Send a bug</button>
+        <button class="nav-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Suggested%20BP%20bug%20type">Suggest a bug type</button>
       </nav>
     </header>
 
@@ -31,17 +31,17 @@
             <p class="eyebrow">Research collaboration request</p>
             <h1 id="intro-title">Debugging scenarios in Behavioral Programming</h1>
             <p class="lede">
-              We are collecting representative bugs in Behavioral Programming programs to improve
-              and evaluate an LLM-agent based workflow for debugging BP models.
+              We are collecting representative types of bugs in Behavioral Programming programs to
+              support research on LLM-agent based debugging workflows for BP models.
             </p>
             <p>
-              The four examples below are candidate bug patterns we found so far. We would
-              appreciate additional scenarios, variants, edge cases, and examples from people
-              familiar with BP.
+              The four examples below are candidate bug types we found so far. We are especially
+              interested in additional types of BP bugs: different failure modes, modeling mistakes,
+              specification gaps, or recurring patterns that should appear in a future dataset.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#scenarios">Review the scenarios</a>
-              <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Additional%20BP%20debugging%20scenario">Email us a bug</button>
+              <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Suggested%20BP%20bug%20type">Suggest a bug type</button>
             </div>
           </div>
           <div class="hero-visual" role="img" aria-label="Abstract visualization of code, event traces, and debugging workflow"></div>
@@ -51,14 +51,14 @@
         <section class="info-band" aria-labelledby="task-title">
           <div>
             <p class="section-label">The task</p>
-            <h2 id="task-title">Help us expand the bug collection</h2>
+            <h2 id="task-title">Help us expand the bug-type catalog</h2>
           </div>
           <div class="info-grid">
             <article>
               <h3>What to send</h3>
               <p>
-                Any BP debugging scenario in free form: code, explanation, expected behavior,
-                wrong traces, screenshots, diagrams, images, or short notes.
+                Any distinct BP bug type or pattern in free form. Concrete code, traces,
+                screenshots, diagrams, or short notes are welcome when they help explain the type.
               </p>
             </article>
             <article>
@@ -71,8 +71,8 @@
             <article>
               <h3>Goal</h3>
               <p>
-                The goal is to build a higher-quality benchmark of BP bugs for evaluating debugging
-                methods, explanations, and LLM-agent repair workflows.
+                The goal is to identify a broader set of BP bug types. From these types, we will
+                create a dataset with varied concrete bugs and use it in debugging experiments.
               </p>
             </article>
             <article>
@@ -88,11 +88,12 @@
         <section class="acknowledgements" aria-labelledby="ack-title">
           <div class="ack-copy">
             <p class="section-label">Acknowledgments</p>
-            <h2 id="ack-title">Thank you for helping shape the benchmark</h2>
+            <h2 id="ack-title">Thank you for helping shape the bug-type catalog</h2>
             <p>
               We thank the BP community, researchers, lecturers, and practitioners who review these
-              examples and contribute additional bugs. Your feedback will help make the resulting
-              dataset more realistic and useful.
+              examples and contribute additional bug types. Concrete examples are useful, but the
+              main value is identifying distinct kinds of BP faults. Your feedback will help make
+              the resulting dataset more realistic and useful.
             </p>
           </div>
           <address class="contact-card">
@@ -106,11 +107,11 @@
       <section id="scenarios-view" class="view" aria-labelledby="scenario-list-title">
         <div class="page-shell">
           <div class="screen-heading">
-            <p class="eyebrow">Candidate bug patterns</p>
+            <p class="eyebrow">Candidate bug types</p>
             <h1 id="scenario-list-title">Choose a scenario to inspect</h1>
             <p>
-              Each screen contains the problem name, incorrect BP-style JavaScript, an explanation,
-              and a wrong trace that illustrates the failure.
+              Each screen presents one candidate bug type, with BP-style JavaScript, an explanation,
+              and a wrong trace that illustrates the failure mode.
             </p>
           </div>
           <div id="scenario-grid" class="scenario-grid" aria-live="polite"></div>

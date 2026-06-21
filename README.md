@@ -1,6 +1,6 @@
 # Behavioral Programming Debugging Scenarios
 
-Static GitHub Pages site for collecting feedback on candidate Behavioral Programming debugging scenarios.
+Static GitHub Pages site for collecting feedback on candidate Behavioral Programming bug types.
 
 ## Local preview
 
