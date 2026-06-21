@@ -9,7 +9,7 @@
     >
     <title>Behavioral Programming Debugging Scenarios</title>
     <link rel="preload" href="assets/bp-debugging-hero.png" as="image">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=3">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -20,7 +20,7 @@
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="#intro">Intro</a>
         <a href="#scenarios">Scenarios</a>
-        <a class="contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Additional%20BP%20debugging%20scenario" target="_blank" rel="noopener">Send a bug</a>
+        <button class="nav-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Additional%20BP%20debugging%20scenario">Send a bug</button>
       </nav>
     </header>
 
@@ -41,10 +41,11 @@
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#scenarios">Review the scenarios</a>
-              <a class="button secondary contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Additional%20BP%20debugging%20scenario" target="_blank" rel="noopener">Email us a bug</a>
+              <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Additional%20BP%20debugging%20scenario">Email us a bug</button>
             </div>
           </div>
           <div class="hero-visual" role="img" aria-label="Abstract visualization of code, event traces, and debugging workflow"></div>
+          <a class="scroll-cue" href="#task-title" aria-label="Scroll to task details"></a>
         </div>
 
         <section class="info-band" aria-labelledby="task-title">
@@ -95,9 +96,9 @@
             </p>
           </div>
           <address class="contact-card">
-            <a class="contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il" target="_blank" rel="noopener">almogzh@post.bgu.ac.il</a>
-            <a class="contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=achiya@bgu.ac.il" target="_blank" rel="noopener">achiya@bgu.ac.il</a>
-            <a class="contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=gera.weiss@gmail.com" target="_blank" rel="noopener">gera.weiss@gmail.com</a>
+            <button class="email-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il">almogzh@post.bgu.ac.il</button>
+            <button class="email-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=achiya@bgu.ac.il">achiya@bgu.ac.il</button>
+            <button class="email-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=gera.weiss@gmail.com">gera.weiss@gmail.com</button>
           </address>
         </section>
       </section>
@@ -124,6 +125,6 @@
       <span>June 2026</span>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=3"></script>
   </body>
 </html>
