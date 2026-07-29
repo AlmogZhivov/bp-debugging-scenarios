@@ -66,11 +66,11 @@ bp.registerBThread("RobotNavigation", function () {
       "The second captured piece is never removed, but execution continues with another move."
   },
   {
-    id: "win-vs-draw-priority",
-    shortTitle: "Win-vs-Draw Priority Bug",
-    title: "Win-vs-draw conflict caused by missing priority or missing block",
+    id: "missing-priority-priority",
+    shortTitle: "Missing Priority Bug",
+    title: "Incorrect event selection caused by missing priority or missing blocking",
     summary:
-      "A final move can create both a win and a full board, allowing Draw to be selected when XWin should override it.",
+      "When multiple events are selectable at the same synchronization point and one should take precedence, failing to encode priority or blocking may allow an unintended lower-priority event to be selected.",
     requirement: "A win should override a draw when both terminal conditions become enabled.",
     code: `bp.registerBThread("DetectXWin", function () {
   bp.sync({ waitFor: XLine });
@@ -124,11 +124,11 @@ bp.registerBThread("EndOfGame", function () {
       "After X(2,0), X completed the column X(0,0), X(1,0), X(2,0), so the expected terminal event is XWin."
   },
   {
-    id: "uncoordinated-hot-cold",
-    shortTitle: "Uncoordinated Hot-Cold Requirements",
-    title: "At-least Hot-Cold requirements without preventing consecutive hot events",
+    id: "uncoordinated-requirements",
+    shortTitle: "Uncoordinated Requirements",
+    title: "Incorrect behavior caused by uncoordinated requirements",
     summary:
-      "Independent counting requirements can be satisfied while the ordering constraint between Hot and Cold is violated.",
+      "Independent requirements may each be satisfied while their combined behavior violates an implicit relationship or ordering constraint.",   
     requirement: "The model needs both occurrence counts and a no-consecutive-Hot coordination rule.",
     code: `var Hot = bp.Event("Hot");
 var Cold = bp.Event("Cold");
