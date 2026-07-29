@@ -218,7 +218,7 @@ function renderDetail(scenario) {
         </div>
         <div class="detail-meta" aria-label="Scenario metadata">
           <div class="meta-pill">${escapeHtml(scenario.requirement)}</div>
-          <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,gera.weiss@gmail.com&su=Feedback%20on%20${encodeURIComponent(scenario.shortTitle)}">Send feedback on this type</button>
+          <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,geraw@bgu.ac.il&su=Feedback%20on%20${encodeURIComponent(scenario.shortTitle)}">Send feedback on this type</button>
         </div>
       </div>
 
