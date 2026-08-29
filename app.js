@@ -117,36 +117,41 @@ b-thread EndOfGame:
   {
     id: "uncoordinated-requirements",
     shortTitle: "Uncoordinated Requirements",
-    title: "Incorrect behavior caused by uncoordinated requirements",
+    title: "Uncoordinated Requirements",
     summary:
-      "Independent requirements may each be satisfied while their combined behavior violates an implicit relationship or ordering constraint.",   
-    requirement: "The model needs both occurrence counts and a no-consecutive-Hot coordination rule.",
-    code: `var Hot = bp.Event("Hot");
-var Cold = bp.Event("Cold");
+      "Multiple requirements may be individually correct, yet their interaction can prevent the system from making progress.",
+    requirement: "Coordination between requirements must preserve both safety and progress.",
+    codeLabel: "Incorrect BP-style pseudocode",
+    codeType: "pseudocode",
+    code: `b-thread RequireHot:
+    repeat 3 times:
+        request(Hot)
 
-bp.registerBThread("AtLeastThreeHot", function () {
-  for (var i = 0; i < 3; i++) {
-    bp.sync({
-      request: Hot
-    });
-  }
-});
+b-thread RequireCold:
+    repeat 3 times:
+        request(Cold)
 
-bp.registerBThread("AtLeastThreeCold", function () {
-  for (var i = 0; i < 3; i++) {
-    bp.sync({
-      request: Cold
-    });
-  }
-});`,
+b-thread NoConsecutiveHot:
+    while true:
+        waitFor(Hot)
+
+        sync(
+            waitFor = Cold,
+            block   = Hot
+        )`,
     explanation: [
-      "The implementation creates two progress obligations: at least three Hot events and at least three Cold events.",
-      "It does not encode the coordination constraint that two Hot events should not occur consecutively.",
-      "If Hot and Cold are both requested and neither is blocked, event selection may still choose consecutive Hot events."
+      "The three requirements are individually reasonable, but their interaction can create a state in which a required event is permanently blocked.",
+      "RequireHot requests three Hot events, RequireCold requests three Cold events, and NoConsecutiveHot blocks Hot after every Hot until a Cold occurs.",
+      "A request does not guarantee that the requested event will eventually occur. Another b-thread may prevent it from being selected.",
+      "If all three Cold events occur before the final Hot obligation, NoConsecutiveHot can later wait for a Cold that no b-thread will request. At the same time, it blocks the remaining requested Hot, leaving no selectable event."
     ],
-    trace: ["Hot", "Hot", "Cold", "Hot", "Cold", "Cold"],
-    traceNote:
-      "The trace satisfies the counting requirement, but it violates the intended rule because the first two Hot events are consecutive."
+    trace: ["Cold", "Cold", "Hot", "Cold", "Hot"],
+    traceOutcome: "[STUCK]",
+    traceExplanation: [
+      "The system still needs another Hot, but Hot is blocked until a Cold occurs.",
+      "No b-thread requests another Cold, so no event is selectable and the system cannot make progress.",
+      "The remaining Hot requirement is never satisfied, even though the no-consecutive-Hot safety rule is preserved."
+    ]
   }
 ];
 
@@ -233,7 +238,7 @@ function renderDetail(scenario) {
           <article class="trace-list">
             <header>
               <span>Wrong trace example</span>
-              <span>${scenario.trace.length} events</span>
+              <span>${scenario.trace.length} events${scenario.traceOutcome ? " + outcome" : ""}</span>
             </header>
             <ol>
               ${scenario.trace
@@ -246,6 +251,12 @@ function renderDetail(scenario) {
                   `
                 )
                 .join("")}
+              ${scenario.traceOutcome ? `
+                <li class="trace-outcome">
+                  <span class="step">!</span>
+                  <span class="event">${escapeHtml(scenario.traceOutcome)}</span>
+                </li>
+              ` : ""}
             </ol>
           </article>
 

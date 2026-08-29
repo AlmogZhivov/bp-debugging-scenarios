@@ -535,6 +535,17 @@ code {
   font-size: 0.94rem;
 }
 
+.trace-list .trace-outcome .step {
+  background: #fff0e5;
+  color: #9a3f14;
+}
+
+.trace-list .trace-outcome .event {
+  background: #fff8f3;
+  color: #9a3f14;
+  font-weight: 800;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
