@@ -1,6 +1,9 @@
-# Behavioral Programming Debugging Scenarios
+# Behavioral Programming Expert Catalog
 
-Static GitHub Pages site for collecting feedback on candidate Behavioral Programming bug types.
+Static GitHub Pages site for collecting expert feedback on two separate Behavioral Programming catalogs:
+
+- Debugging scenarios: behavioral failure patterns illustrated through executions.
+- Potential bad smells: suspicious structural patterns for future linting and static analysis.
 
 ## Local preview
 

@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Interactive collection of Behavioral Programming bug types for research feedback."
+      content="Behavioral Programming debugging scenarios and potential bad smells for expert review."
     >
-    <title>Behavioral Programming Debugging Scenarios</title>
+    <title>Behavioral Programming Expert Catalog</title>
     <link rel="preload" href="assets/bp-debugging-hero.png" as="image">
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=8">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
-      <a class="brand" href="#intro" aria-label="Behavioral Programming Debugging Scenarios home">
+      <a class="brand" href="#intro" aria-label="Behavioral Programming Expert Catalog home">
         <span class="brand-mark" aria-hidden="true">BP</span>
-        <span>Debugging Scenarios</span>
+        <span>Expert Catalog</span>
       </a>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="#intro">Intro</a>
-        <a href="#scenarios">Scenarios</a>
+        <a href="#scenarios">Debugging scenarios</a>
+        <a href="#smells">Bad smells</a>
         <button class="nav-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,geraw@bgu.ac.il&su=Suggested%20BP%20bug%20type">Suggest a bug type</button>
         <button class="nav-button compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,geraw@bgu.ac.il&su=General%20review%20of%20BP%20debugging%20scenarios">General review</button>
       </nav>
@@ -30,37 +31,62 @@
         <div class="hero">
           <div class="hero-copy">
             <p class="eyebrow">Research collaboration request</p>
-            <h1 id="intro-title">Debugging scenarios in Behavioral Programming</h1>
+            <h1 id="intro-title">Behavioral Programming expert catalog</h1>
             <p class="lede">
-              We are collecting representative types of bugs in Behavioral Programming programs to
-              support research on LLM-agent based debugging workflows for BP models.
+              We are collecting Behavioral Programming debugging scenarios and potential structural
+              bad smells for expert review.
             </p>
             <p>
-              The four examples below are candidate bug types we found so far. We are especially
-              interested in additional types of BP bugs: different failure modes, modeling mistakes,
-              specification gaps, or recurring patterns that should appear in a future dataset.
+              Debugging scenarios describe behavioral failures observed through executions. Bad
+              smells are separate, static-analysis patterns that may deserve inspection but are not
+              necessarily bugs.
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#scenarios">Review the scenarios</a>
+              <a class="button primary" href="#scenarios">Debugging scenarios</a>
+              <a class="button smell-primary" href="#smells">Potential bad smells</a>
               <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,geraw@bgu.ac.il&su=Suggested%20BP%20bug%20type">Suggest a bug type</button>
               <button class="button secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,geraw@bgu.ac.il&su=General%20review%20of%20BP%20debugging%20scenarios">General review</button>
             </div>
           </div>
           <div class="hero-visual" role="img" aria-label="Abstract visualization of code, event traces, and debugging workflow"></div>
-          <a class="scroll-cue" href="#task-title" aria-label="Scroll to task details"></a>
+          <a class="scroll-cue" href="#catalog-title" aria-label="Scroll to the catalogs"></a>
         </div>
+
+        <section class="catalog-overview" aria-labelledby="catalog-title">
+          <div class="catalog-heading">
+            <p class="section-label">Two complementary catalogs</p>
+            <h2 id="catalog-title">Choose the kind of evidence to inspect</h2>
+          </div>
+          <div class="catalog-grid">
+            <a class="catalog-card bug-catalog" href="#scenarios">
+              <span class="catalog-kicker">Bug types</span>
+              <h3>Debugging Scenarios</h3>
+              <p>Confirmed behavioral failure patterns illustrated through executions and wrong traces.</p>
+              <span class="catalog-link">Explore 4 scenarios</span>
+            </a>
+            <a class="catalog-card smell-catalog" href="#smells">
+              <span class="badge-row">
+                <span class="smell-badge">Potential smell</span>
+                <span class="analysis-badge">Static analysis</span>
+              </span>
+              <h3>Potential Bad Smells</h3>
+              <p>Suspicious structural patterns that may indicate a modeling problem, but are not necessarily bugs.</p>
+              <span class="catalog-link">Explore 4 smells</span>
+            </a>
+          </div>
+        </section>
 
         <section class="info-band" aria-labelledby="task-title">
           <div>
             <p class="section-label">The task</p>
-            <h2 id="task-title">Help us expand the bug-type catalog</h2>
+            <h2 id="task-title">Help us refine both catalogs</h2>
           </div>
           <div class="info-grid">
             <article>
               <h3>What to send</h3>
               <p>
-                Any distinct BP bug type or pattern in free form. Concrete code, traces,
-                screenshots, diagrams, or short notes are welcome when they help explain the type.
+                Any distinct BP bug type or potential bad smell in free form. Code, traces,
+                screenshots, diagrams, and short notes are welcome.
               </p>
             </article>
             <article>
@@ -73,15 +99,15 @@
             <article>
               <h3>Goal</h3>
               <p>
-                The goal is to identify a broader set of BP bug types. From these types, we will
-                create a dataset with varied concrete bugs and use it in debugging experiments.
+                We will use bug types to construct a debugging dataset. Bad smells form a separate
+                catalog of candidates for future BP linting and static analysis.
               </p>
             </article>
             <article>
               <h3>Methodology</h3>
               <p>
-                Our methodology studies how agentic LLM workflows inspect BP event traces, reason
-                about synchronization behavior, explain faults, and propose repairs.
+                Our methodology combines execution-based analysis of failures with structural review
+                of requests, waits, blocks, and event relationships.
               </p>
             </article>
           </div>
@@ -90,12 +116,11 @@
         <section class="acknowledgements" aria-labelledby="ack-title">
           <div class="ack-copy">
             <p class="section-label">Acknowledgments</p>
-            <h2 id="ack-title">Thank you for helping shape the bug-type catalog</h2>
+            <h2 id="ack-title">Thank you for helping shape the catalogs</h2>
             <p>
               We thank the BP community, researchers, lecturers, and practitioners who review these
-              examples and contribute additional bug types. Concrete examples are useful, but the
-              main value is identifying distinct kinds of BP faults. Your feedback will help make
-              the resulting dataset more realistic and useful.
+              examples and contribute additional bug types or suspicious structural patterns. Your
+              feedback will help make the debugging dataset and static-analysis catalog more useful.
             </p>
           </div>
           <address class="contact-card">
@@ -109,14 +134,32 @@
       <section id="scenarios-view" class="view" aria-labelledby="scenario-list-title">
         <div class="page-shell">
           <div class="screen-heading">
-            <p class="eyebrow">Candidate bug types</p>
-            <h1 id="scenario-list-title">Choose a scenario to inspect</h1>
+            <p class="eyebrow">Bug types · Execution analysis</p>
+            <h1 id="scenario-list-title">Debugging scenarios</h1>
             <p>
-              Each screen presents one candidate bug type, with BP-style JavaScript, an explanation,
-              and a wrong trace that illustrates the failure mode.
+              Confirmed behavioral failure patterns illustrated with BP-style pseudocode,
+              explanations, and wrong execution traces.
             </p>
           </div>
           <div id="scenario-grid" class="scenario-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="smells-view" class="view smells-view" aria-labelledby="smell-list-title">
+        <div class="page-shell">
+          <div class="screen-heading smell-heading">
+            <span class="badge-row">
+              <span class="smell-badge">Potential smell</span>
+              <span class="analysis-badge">Static analysis</span>
+            </span>
+            <h1 id="smell-list-title">Potential BP Bad Smells</h1>
+            <p>
+              Certain structural patterns in a Behavioral Programming model may be suspicious even
+              when no incorrect execution has been observed. A bad smell is not necessarily a bug;
+              it is a pattern that may deserve further inspection.
+            </p>
+          </div>
+          <div id="smell-grid" class="smell-grid" aria-live="polite"></div>
         </div>
       </section>
 
@@ -124,10 +167,10 @@
     </main>
 
     <footer class="site-footer">
-      <span>Behavioral Programming Debugging Scenarios</span>
+      <span>Behavioral Programming Expert Catalog</span>
       <span>June 2026</span>
     </footer>
 
-    <script src="app.js?v=8"></script>
+    <script src="app.js?v=9"></script>
   </body>
 </html>
