@@ -9,7 +9,7 @@
     >
     <title>Behavioral Programming Expert Catalog</title>
     <link rel="preload" href="assets/bp-debugging-hero.png" as="image">
-    <link rel="stylesheet" href="styles.css?v=13">
+    <link rel="stylesheet" href="styles.css?v=14">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -34,13 +34,13 @@
             <p class="eyebrow">Research collaboration request</p>
             <h1 id="intro-title">Behavioral Programming expert catalog</h1>
             <p class="lede">
-              We are collecting Behavioral Programming debugging scenarios and potential structural
-              bad smells for expert review.
+              We are collecting Behavioral Programming debugging scenarios and potential bad smells
+              for expert review.
             </p>
             <p>
               Debugging scenarios describe behavioral failures observed through executions. Bad
-              smells are separate, static-analysis patterns that may deserve inspection but are not
-              necessarily bugs.
+              smells are separate, suspicious patterns found through model structure, execution
+              evidence, or both; they are not necessarily bugs.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#scenarios">Debugging scenarios</a>
@@ -67,7 +67,7 @@
             </a>
             <a class="catalog-card smell-catalog" href="#smells">
               <h3>Potential Bad Smells</h3>
-              <p>Suspicious structural patterns that may indicate a modeling problem, but are not necessarily bugs.</p>
+              <p>Suspicious patterns identified through model structure, execution evidence, or both; they are not necessarily bugs.</p>
               <span class="catalog-link">Explore 4 smells</span>
             </a>
           </div>
@@ -97,7 +97,7 @@
               <h3>Goal</h3>
               <p>
                 We will use bug types to construct a debugging dataset. Bad smells form a separate
-                catalog of candidates for future BP linting and static analysis.
+                catalog of candidates for BP linting, runtime checks, and model review.
               </p>
             </article>
             <article>
@@ -116,8 +116,8 @@
             <h2 id="ack-title">Thank you for helping shape the catalogs</h2>
             <p>
               We thank the BP community, researchers, lecturers, and practitioners who review these
-              examples and contribute additional bug types or suspicious structural patterns. Your
-              feedback will help make the debugging dataset and static-analysis catalog more useful.
+              examples and contribute additional bug types or potential bad smells. Your
+              feedback will help make the debugging dataset and bad-smell catalog more useful.
             </p>
           </div>
           <address class="contact-card">
@@ -147,13 +147,12 @@
           <div class="screen-heading smell-heading">
             <span class="badge-row">
               <span class="smell-badge">Potential smell</span>
-              <span class="analysis-badge">Static analysis</span>
             </span>
             <h1 id="smell-list-title">Potential BP Bad Smells</h1>
             <p>
-              Certain structural patterns in a Behavioral Programming model may be suspicious even
-              when no incorrect execution has been observed. A bad smell is not necessarily a bug;
-              it is a pattern that may deserve further inspection.
+              Certain patterns in a Behavioral Programming model may be suspicious without being
+              confirmed bugs. Evidence may come from model structure, execution behavior, or both;
+              each smell is a reason for further inspection.
             </p>
             <div class="screen-heading-actions">
               <button class="button smell-secondary compose-action" type="button" data-compose-url="https://mail.google.com/mail/?view=cm&fs=1&to=almogzh@post.bgu.ac.il,achiya@bgu.ac.il,geraw@bgu.ac.il&su=Suggested%20BP%20bad%20smell">Suggest a bad smell</button>
@@ -171,6 +170,6 @@
       <span>June 2026</span>
     </footer>
 
-    <script src="app.js?v=12"></script>
+    <script src="app.js?v=13"></script>
   </body>
 </html>

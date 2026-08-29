@@ -375,8 +375,7 @@ h3 {
   gap: 7px;
 }
 
-.smell-badge,
-.analysis-badge {
+.smell-badge {
   display: inline-flex;
   align-items: center;
   min-height: 27px;
@@ -392,12 +391,6 @@ h3 {
   border: 1px solid var(--amber-line);
   background: var(--amber-soft);
   color: var(--amber-dark);
-}
-
-.analysis-badge {
-  border: 1px solid #cdd8dc;
-  background: #f2f6f7;
-  color: #465860;
 }
 
 .info-band {
@@ -703,13 +696,13 @@ h3 {
   color: var(--amber-dark);
 }
 
-.lint-finding {
+.smell-finding {
   border-color: var(--amber-line) !important;
   border-left: 4px solid var(--amber) !important;
   background: #fffdf8 !important;
 }
 
-.lint-finding .section-label {
+.smell-finding .section-label {
   margin-bottom: 9px;
 }
 

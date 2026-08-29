@@ -3,7 +3,7 @@
 Static GitHub Pages site for collecting expert feedback on two separate Behavioral Programming catalogs:
 
 - Debugging scenarios: behavioral failure patterns illustrated through executions.
-- Potential bad smells: suspicious structural patterns for future linting and static analysis.
+- Potential bad smells: suspicious patterns identified through model structure, execution evidence, or both.
 
 ## Local preview
 

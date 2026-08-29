@@ -395,7 +395,6 @@ function renderSmellDetail(smell) {
         <div>
           <span class="badge-row">
             <span class="smell-badge">Potential smell</span>
-            <span class="analysis-badge">Static analysis</span>
           </span>
           <h1>${escapeHtml(smell.title)}</h1>
           <p class="lede">${escapeHtml(smell.summary)}</p>
@@ -416,8 +415,8 @@ function renderSmellDetail(smell) {
         </article>
 
         <div class="detail-copy smell-copy">
-          <section class="lint-finding">
-            <p class="section-label">Example static-analysis finding</p>
+          <section class="smell-finding">
+            <p class="section-label">Example finding</p>
             <p class="finding-message">${escapeHtml(smell.finding)}</p>
             <p class="possible-causes"><strong>Possible causes:</strong> ${escapeHtml(smell.causes)}</p>
           </section>
