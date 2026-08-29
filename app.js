@@ -38,36 +38,33 @@ b-thread ServiceState:
   {
     id: "incorrect-response-obligation",
     shortTitle: "Incorrect Response Obligation",
-    title: "Wrong implementation of \"for every X, there must be a corresponding Y\"",
+    title: "Wrong Implementation of \"For Every X, There Must Be a Corresponding Y\"",
     summary:
-      "A sequential b-thread creates only one cleanup obligation and can miss later events that require their own response.",
-    requirement: "Every Jump(v) must eventually have a matching Remove(v).",
-    code: `bp.registerBThread("ExecuteCaptures", function () {
-  while (true) {
-    var jump = bp.sync({
-      waitFor: JumpMoves
-    });
+      "A sequential b-thread may miss a new occurrence of X while it is still handling the response Y for a previous occurrence.",
+    requirement: "Every occurrence of X must create its own corresponding Y obligation.",
+    codeLabel: "Incorrect BP-style pseudocode",
+    codeType: "pseudocode",
+    code: `b-thread LogMessages:
+    while true:
+        m = waitFor(Message)
+        request(Log(m))
 
-    var victim = jump.data.cap_id;
-
-    bp.sync({
-      request: RemoveEvent(victim)
-    });
-  }
-});`,
+b-thread ProduceMessages:
+    request(Message("Hello"))
+    request(Message("World"))`,
     explanation: [
-      "The b-thread observes one capture jump and then moves to a synchronization point that requests the corresponding remove event.",
-      "While it is waiting for that remove event, it is no longer waiting for additional jump events. A second jump can therefore be missed.",
-      "The requirement is not merely that some remove event occurs after a jump. Each jump creates its own independent cleanup obligation."
+      "LogMessages is intended to implement the requirement: for every Message(m), a corresponding Log(m) must occur.",
+      "After observing Message(\"Hello\"), the b-thread moves to its next synchronization point and requests Log(\"Hello\"). At that moment, however, it is no longer waiting for Message events.",
+      "Meanwhile, ProduceMessages may request Message(\"World\"). Both Log(\"Hello\") and Message(\"World\") can now be selectable.",
+      "If Message(\"World\") is selected first, LogMessages does not observe it because the b-thread is still at the synchronization point requesting Log(\"Hello\"). The second message therefore creates no corresponding logging obligation.",
+      "The problem is that a single sequential b-thread is being used to implement multiple potentially overlapping response obligations."
     ],
-    trace: [
-      "JumpMove(redPiece1, blackVictim1)",
-      "JumpMove(redPiece1, blackVictim2)",
-      "Remove(blackVictim1)",
-      "NormalMove(otherBlackPiece)"
-    ],
-    traceNote:
-      "The second captured piece is never removed, but execution continues with another move."
+    trace: ["Message(\"Hello\")", "Message(\"World\")", "Log(\"Hello\")"],
+    traceExplanation: [
+      "Message(\"World\") occurs while LogMessages is still handling the obligation created by Message(\"Hello\").",
+      "Because the b-thread is not waiting for new messages at that synchronization point, it misses Message(\"World\").",
+      "As a result, Log(\"World\") is never requested, violating the requirement that every message must have its own corresponding log event."
+    ]
   },
   {
     id: "missing-priority-priority",
