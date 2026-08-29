@@ -38,9 +38,10 @@
               for expert review.
             </p>
             <p>
-              Debugging scenarios describe behavioral failures observed through executions. Bad
-              smells are separate, suspicious patterns found through model structure, execution
-              evidence, or both; they are not necessarily bugs.
+              The four debugging scenarios present candidate bug types with BP-style pseudocode,
+              short explanations, and wrong traces. In addition, we present several potential BP
+              bad smells: suspicious behavioral patterns that are not necessarily bugs, but may
+              indicate incomplete, redundant, or problematic interactions in a BP model.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#scenarios">Debugging scenarios</a>
@@ -62,7 +63,7 @@
             <a class="catalog-card bug-catalog" href="#scenarios">
               <span class="catalog-kicker">Bug types</span>
               <h3>Debugging Scenarios</h3>
-              <p>Confirmed behavioral failure patterns illustrated through executions and wrong traces.</p>
+              <p>Candidate behavioral failure patterns illustrated through executions and wrong traces.</p>
               <span class="catalog-link">Explore 4 scenarios</span>
             </a>
             <a class="catalog-card smell-catalog" href="#smells">
@@ -134,8 +135,8 @@
             <p class="eyebrow">Bug types · Execution analysis</p>
             <h1 id="scenario-list-title">Debugging scenarios</h1>
             <p>
-              Confirmed behavioral failure patterns illustrated with BP-style pseudocode,
-              explanations, and wrong execution traces.
+              Each screen presents one candidate bug type, with BP-style pseudocode, a short
+              explanation, and a wrong trace that illustrates the failure mode.
             </p>
           </div>
           <div id="scenario-grid" class="scenario-grid" aria-live="polite"></div>
@@ -170,6 +171,6 @@
       <span>June 2026</span>
     </footer>
 
-    <script src="app.js?v=13"></script>
+    <script src="app.js?v=14"></script>
   </body>
 </html>

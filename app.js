@@ -340,8 +340,8 @@ function renderDetail(scenario) {
       <div class="detail-layout">
         <article class="code-panel">
           <header>
-            <span>${escapeHtml(scenario.codeLabel ?? "Incorrect BP-style JavaScript")}</span>
-            <span>${escapeHtml(scenario.codeType ?? ".js")}</span>
+            <span>${escapeHtml(scenario.codeLabel ?? "Incorrect BP-style pseudocode")}</span>
+            <span>${escapeHtml(scenario.codeType ?? "pseudocode")}</span>
           </header>
           <pre><code>${highlightCode(scenario.code)}</code></pre>
         </article>
