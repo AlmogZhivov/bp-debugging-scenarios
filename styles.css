@@ -114,7 +114,8 @@ a {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  min-height: calc(86vh - 72px);
+  min-height: calc(100vh - 72px);
+  min-height: calc(100svh - 72px);
   overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
