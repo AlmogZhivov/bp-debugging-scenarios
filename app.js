@@ -160,22 +160,26 @@ const smells = [
     id: "unobserved-event",
     title: "Unobserved Event",
     summary:
-      "An event is requested and may occur, but no other b-thread explicitly waits for it.",
+      "An event is requested and selected, but no observing b-thread explicitly waits for or reacts to it.",
     principle:
-      "An event that affects the behavioral model would normally be observed by at least one relevant behavior.",
+      "An event that affects the behavioral model would normally be observed by at least one relevant b-thread.",
     code: `b-thread Producer:
     request(Action)
 
-No b-thread:
-    waitFor(Action)`,
+No observing b-thread:
+    waitFor(Action)
+
+Selected event:
+    Action`,
     suspicious: [
-      "Action can occur without any other b-thread observing or reacting to it.",
+      "The model requests Action, and execution evidence confirms that Action is selected. Nevertheless, no observing b-thread waits for it or reacts to its occurrence.",
+      "The absence of a listener is a structural warning; observing the event in an execution makes the warning stronger because the unobserved event is reachable in practice.",
       "This may indicate a missing listener, a missing behavioral response, or an event that is no longer relevant to the model."
     ],
     caveat: [
       "Some events are intentionally produced only as outputs to the environment and do not require another b-thread to observe them."
     ],
-    finding: "Action is requested but has no known observer.",
+    finding: "Action was selected but has no known observing b-thread.",
     causes: "missing listener · missing behavioral response · obsolete event"
   },
   {
