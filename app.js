@@ -69,45 +69,32 @@ b-thread ProduceMessages:
   {
     id: "missing-priority-priority",
     shortTitle: "Missing Priority Bug",
-    title: "Incorrect event selection caused by missing priority or missing blocking",
+    title: "Incorrect Event Selection Caused by Missing Priority or Blocking",
     summary:
-      "When multiple events are selectable at the same synchronization point and one should take precedence, failing to encode priority or blocking may allow an unintended lower-priority event to be selected.",
-    requirement: "A win should override a draw when both terminal conditions become enabled.",
-    code: `bp.registerBThread("DetectXWin", function () {
-  bp.sync({ waitFor: XLine });
-  bp.sync({ waitFor: XLine });
-  bp.sync({ waitFor: XLine });
+      "When multiple events are selectable at the same synchronization point, failing to encode the required precedence may allow the wrong event to be selected.",
+    requirement:
+      "A win should take precedence over a draw when both terminal conditions become enabled at the same time.",
+    codeLabel: "Incorrect BP-style pseudocode",
+    codeType: "pseudocode",
+    code: `b-thread DetectXWin:
+    waitFor(X completes a winning line)
+    request(XWin)
 
-  bp.sync({
-    request: XWin
-  });
-});
+b-thread DetectDraw:
+    repeat 9 times:
+        waitFor(Move)
 
-bp.registerBThread("DetectDraw", function () {
-  for (var i = 0; i < 9; i++) {
-    bp.sync({
-      waitFor: Move
-    });
-  }
+    request(Draw)
 
-  bp.sync({
-    request: Draw
-  });
-});
-
-bp.registerBThread("EndOfGame", function () {
-  bp.sync({
-    waitFor: [XWin, OWin, Draw]
-  });
-
-  bp.sync({
-    block: bp.all
-  });
-});`,
+b-thread EndOfGame:
+    waitFor([XWin, OWin, Draw])
+    block(AllEvents)`,
     explanation: [
-      "The win detector and draw detector are independent terminal-condition b-threads.",
-      "If the final move fills the board and also creates a winning line, both XWin and Draw can be requested at the same synchronization point.",
-      "Without a priority rule or a block that prevents Draw when a win is available, the event-selection strategy may choose the wrong terminal event."
+      "The win detector and the draw detector represent two independent behavioral requirements.",
+      "DetectXWin requests XWin when an X move completes a winning line. At the same time, DetectDraw counts every move and requests Draw after the ninth move.",
+      "If the ninth move also completes a winning line for X, both b-threads reach their request points in the same synchronization state: DetectXWin requests XWin, while DetectDraw requests Draw. Both events are therefore selectable.",
+      "The intended behavior requires XWin to take precedence over Draw. Since no priority rule or blocking relation expresses this requirement, the event-selection mechanism may select Draw.",
+      "Neither b-thread is individually incorrect. The bug appears in the interaction between their requests because the required precedence was not encoded."
     ],
     trace: [
       "X(0,0)",
@@ -121,8 +108,11 @@ bp.registerBThread("EndOfGame", function () {
       "X(2,0)",
       "Draw"
     ],
-    traceNote:
-      "After X(2,0), X completed the column X(0,0), X(1,0), X(2,0), so the expected terminal event is XWin."
+    traceExplanation: [
+      "The final move X(2,0) completes the column X(0,0), X(1,0), X(2,0).",
+      "It is also the ninth move, so both the win condition and the draw condition become enabled.",
+      "The expected terminal event is XWin, but because no precedence between XWin and Draw is encoded, Draw may be selected instead."
+    ]
   },
   {
     id: "uncoordinated-requirements",
