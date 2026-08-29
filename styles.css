@@ -563,6 +563,17 @@ h3 {
   color: var(--muted);
 }
 
+.smell-card .smell-signal {
+  border-left: 3px solid var(--amber);
+  margin: 18px 0 0;
+  padding: 8px 10px;
+  background: var(--amber-soft);
+  color: var(--amber-dark);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
 .smell-open-label,
 .smell-back-link {
   color: var(--amber-dark);

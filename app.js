@@ -205,34 +205,30 @@ No b-thread:
     causes: "missing producer · event-name mismatch · external event not declared"
   },
   {
-    id: "self-blocking-sync-point",
-    title: "Self-Blocking Synchronization Point",
+    id: "closed-event-dependency-cycle",
+    title: "Closed Event-Dependency Cycle",
     summary:
-      "A b-thread requests or waits for an event while blocking the same event at the same synchronization point.",
+      "A group of b-threads forms a circular event dependency with no apparent event that can initiate the interaction.",
+    cardSignal: "X → Y → X · No internal initiating event found.",
     principle:
-      "A b-thread should not prevent the very event on which its own progress depends.",
-    code: `b-thread BehaviorA:
-    sync(
-        waitFor = Ready,
-        block   = Ready
-    )
+      "A closed event-dependency cycle needs a possible initiating event or an incoming dependency.",
+    code: `b-thread A:
+    waitFor(X)
+    request(Y)
 
-or:
-
-b-thread BehaviorB:
-    sync(
-        request = Action,
-        block   = Action
-    )`,
+b-thread B:
+    waitFor(Y)
+    request(X)`,
     suspicious: [
-      "While the b-thread remains at this synchronization point, the blocked event cannot be selected.",
-      "The declaration may therefore be internally contradictory and can prevent the b-thread from progressing as intended."
+      "Neither behavior can initiate the sequence by itself: X enables Y, while Y enables X.",
+      "The model contains a behavioral cycle but no apparent entry point into that cycle, so both b-threads may remain waiting indefinitely.",
+      "A linter can construct an event-dependency graph and flag a closed component that has no incoming producer."
     ],
     caveat: [
-      "Unusual modeling patterns may use such declarations deliberately, but the synchronization point deserves explicit inspection."
+      "One of the events may be generated externally, or another execution path not shown here may initiate the cycle."
     ],
-    finding: "Ready is both awaited and blocked at the same synchronization point.",
-    causes: "contradictory declaration · incorrect event set · copy-and-paste error"
+    finding: "X → Y → X. No internal initiating event was found.",
+    causes: "missing producer · external event not declared · unreachable interaction"
   },
   {
     id: "ineffective-blocking-rule",
@@ -316,6 +312,7 @@ function renderSmellGrid() {
             <span class="smell-index">Smell ${String(index + 1).padStart(2, "0")}</span>
             <h2>${escapeHtml(smell.title)}</h2>
             <p>${escapeHtml(smell.summary)}</p>
+            ${smell.cardSignal ? `<p class="smell-signal">${escapeHtml(smell.cardSignal)}</p>` : ""}
           </div>
           <span class="smell-open-label">Inspect pattern</span>
         </a>
