@@ -309,10 +309,6 @@ function renderSmellGrid() {
       (smell, index) => `
         <a class="smell-card" href="#smell/${smell.id}">
           <div>
-            <span class="badge-row">
-              <span class="smell-badge">Potential smell</span>
-              <span class="analysis-badge">Static analysis</span>
-            </span>
             <span class="smell-index">Smell ${String(index + 1).padStart(2, "0")}</span>
             <h2>${escapeHtml(smell.title)}</h2>
             <p>${escapeHtml(smell.summary)}</p>

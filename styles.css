@@ -233,6 +233,18 @@ h3 {
   background: var(--amber-dark);
 }
 
+.button.smell-secondary {
+  border-color: var(--amber-line);
+  background: #fffdf8;
+  color: var(--amber-dark);
+}
+
+.button.smell-secondary:hover,
+.button.smell-secondary:focus-visible {
+  border-color: var(--amber);
+  background: var(--amber-soft);
+}
+
 .hero-visual {
   min-width: 0;
   min-height: 440px;
@@ -346,6 +358,10 @@ h3 {
 
 .smell-catalog .catalog-link {
   color: var(--amber-dark);
+}
+
+.smell-catalog h3 {
+  margin-top: 0;
 }
 
 .badge-row {
@@ -463,6 +479,13 @@ h3 {
   font-size: clamp(2.65rem, 5vw, 5rem);
 }
 
+.screen-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
 .scenario-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -518,7 +541,7 @@ h3 {
 
 .smell-index {
   display: block;
-  margin-top: 18px;
+  margin-top: 0;
   color: var(--amber-dark);
   font-size: 0.82rem;
   font-weight: 820;
