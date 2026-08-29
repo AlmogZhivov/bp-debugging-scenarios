@@ -2,34 +2,38 @@ const scenarios = [
   {
     id: "stale-request",
     shortTitle: "Stale Request",
-    title: "Stale request",
+    title: "Stale Request",
     summary:
-      "A b-thread keeps requesting an action that was justified by an earlier observation, even after the state has changed.",
-    requirement: "Requests must be based on the current synchronization state.",
-    code: `var WayAhead = bp.Event("WayAhead");
-var GoAhead = bp.Event("GoAhead");
-var BlockedAhead = bp.Event("BlockedAhead");
-var TurnRight = bp.Event("TurnRight");
+      "A b-thread continues requesting an event after the condition that justified the request is no longer valid.",
+    requirement:
+      "A request should remain active only while the condition that justified it is still valid.",
+    codeLabel: "Incorrect BP-style pseudocode",
+    codeType: "pseudocode",
+    code: `b-thread HandleCommands:
+    while true:
+        command = waitFor(AllCommands)
+        request(Do(command))
 
-bp.registerBThread("RobotNavigation", function () {
-  while (true) {
-    bp.sync({
-      waitFor: WayAhead
-    });
+b-thread ServiceState:
+    while true:
+        waitFor(StopService)
 
-    bp.sync({
-      request: GoAhead
-    });
-  }
-});`,
+        sync(
+            waitFor = ResumeService,
+            block   = AllDoActions
+        )`,
     explanation: [
-      "The robot observes WayAhead and then requests GoAhead. The request can become stale if the environment changes before GoAhead is selected.",
-      "Another b-thread may select TurnRight or BlockedAhead while RobotNavigation remains at a synchronization point that still requests GoAhead.",
-      "The bug is subtle because GoAhead is not always wrong. It becomes wrong only in a later state where the original assumption is no longer valid."
+      "After receiving a command, HandleCommands requests the corresponding Do(command) event.",
+      "If StopService occurs before that action is selected, ServiceState moves to a synchronization point that blocks all Do(...) actions until ResumeService occurs.",
+      "Blocking the event does not remove the existing request. HandleCommands therefore remains at the same synchronization point and continues requesting the old action.",
+      "When ResumeService occurs, ServiceState leaves the blocking synchronization point. The old request may then become selectable even though the condition that originally justified it is no longer valid. The request is therefore stale."
     ],
-    trace: ["WayAhead", "TurnRight", "BlockedAhead", "GoAhead"],
-    traceNote:
-      "The last event is wrong because GoAhead is selected after the path has become blocked."
+    trace: ["Command(A)", "StopService", "ResumeService", "Do(A)"],
+    traceExplanation: [
+      "Do(A) corresponds to a command received before the service was stopped.",
+      "Stopping the service should invalidate pending actions from the previous service state. After the service resumes, the old action should not execute simply because the blocking constraint has been removed.",
+      "The bug occurs because HandleCommands never withdraws or invalidates its old request for Do(A)."
+    ]
   },
   {
     id: "incorrect-response-obligation",
@@ -207,6 +211,8 @@ function renderScenarioGrid() {
 }
 
 function renderDetail(scenario) {
+  const traceExplanation = scenario.traceExplanation ?? [scenario.traceNote];
+
   views.detail.innerHTML = `
     <div class="detail-shell">
       <a class="back-link" href="#scenarios">Back to scenarios</a>
@@ -225,8 +231,8 @@ function renderDetail(scenario) {
       <div class="detail-layout">
         <article class="code-panel">
           <header>
-            <span>Incorrect BP-style JavaScript</span>
-            <span>.js</span>
+            <span>${escapeHtml(scenario.codeLabel ?? "Incorrect BP-style JavaScript")}</span>
+            <span>${escapeHtml(scenario.codeType ?? ".js")}</span>
           </header>
           <pre><code>${highlightCode(scenario.code)}</code></pre>
         </article>
@@ -258,7 +264,7 @@ function renderDetail(scenario) {
 
           <section>
             <h2>Why the trace is wrong</h2>
-            <p>${escapeHtml(scenario.traceNote)}</p>
+            ${traceExplanation.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
           </section>
         </div>
       </div>
