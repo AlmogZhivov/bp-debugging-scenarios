@@ -150,7 +150,7 @@ p {
 h1 {
   max-width: 11ch;
   margin-bottom: 20px;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
   font-size: clamp(3rem, 13cqw, 5.7rem);
   line-height: 0.98;
   letter-spacing: 0;
@@ -176,6 +176,11 @@ h3 {
 
 .hero-copy p:not(.eyebrow) {
   max-width: 64ch;
+}
+
+.hero-copy h1 {
+  max-width: 14ch;
+  word-break: normal;
 }
 
 .hero-actions {
