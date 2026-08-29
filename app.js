@@ -209,7 +209,6 @@ No b-thread:
     title: "Closed Event-Dependency Cycle",
     summary:
       "A group of b-threads forms a circular event dependency with no apparent event that can initiate the interaction.",
-    cardSignal: "X → Y → X · No internal initiating event found.",
     principle:
       "A closed event-dependency cycle needs a possible initiating event or an incoming dependency.",
     code: `b-thread A:
@@ -312,7 +311,6 @@ function renderSmellGrid() {
             <span class="smell-index">Smell ${String(index + 1).padStart(2, "0")}</span>
             <h2>${escapeHtml(smell.title)}</h2>
             <p>${escapeHtml(smell.summary)}</p>
-            ${smell.cardSignal ? `<p class="smell-signal">${escapeHtml(smell.cardSignal)}</p>` : ""}
           </div>
           <span class="smell-open-label">Inspect pattern</span>
         </a>
