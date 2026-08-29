@@ -73,27 +73,27 @@ b-thread ProduceMessages:
     summary:
       "When multiple events are selectable at the same synchronization point, failing to encode the required precedence may allow the wrong event to be selected.",
     requirement:
-      "A win should take precedence over a draw when both terminal conditions become enabled at the same time.",
+      "A win should take precedence over a tie when both terminal conditions become enabled at the same time.",
     codeLabel: "Incorrect BP-style pseudocode",
     codeType: "pseudocode",
     code: `b-thread DetectXWin:
     waitFor(X completes a winning line)
     request(XWin)
 
-b-thread DetectDraw:
+b-thread DetectTie:
     repeat 9 times:
         waitFor(Move)
 
-    request(Draw)
+    request(Tie)
 
 b-thread EndOfGame:
-    waitFor([XWin, OWin, Draw])
+    waitFor([XWin, OWin, Tie])
     block(AllEvents)`,
     explanation: [
-      "The win detector and the draw detector represent two independent behavioral requirements.",
-      "DetectXWin requests XWin when an X move completes a winning line. At the same time, DetectDraw counts every move and requests Draw after the ninth move.",
-      "If the ninth move also completes a winning line for X, both b-threads reach their request points in the same synchronization state: DetectXWin requests XWin, while DetectDraw requests Draw. Both events are therefore selectable.",
-      "The intended behavior requires XWin to take precedence over Draw. Since no priority rule or blocking relation expresses this requirement, the event-selection mechanism may select Draw.",
+      "The win detector and the tie detector represent two independent behavioral requirements.",
+      "DetectXWin requests XWin when an X move completes a winning line. At the same time, DetectTie counts every move and requests Tie after the ninth move.",
+      "If the ninth move also completes a winning line for X, both b-threads reach their request points in the same synchronization state: DetectXWin requests XWin, while DetectTie requests Tie. Both events are therefore selectable.",
+      "The intended behavior requires XWin to take precedence over Tie. Since no priority rule or blocking relation expresses this requirement, the event-selection mechanism may select Tie.",
       "Neither b-thread is individually incorrect. The bug appears in the interaction between their requests because the required precedence was not encoded."
     ],
     trace: [
@@ -106,12 +106,12 @@ b-thread EndOfGame:
       "X(0,1)",
       "O(0,2)",
       "X(2,0)",
-      "Draw"
+      "Tie"
     ],
     traceExplanation: [
       "The final move X(2,0) completes the column X(0,0), X(1,0), X(2,0).",
-      "It is also the ninth move, so both the win condition and the draw condition become enabled.",
-      "The expected terminal event is XWin, but because no precedence between XWin and Draw is encoded, Draw may be selected instead."
+      "It is also the ninth move, so both the win condition and the tie condition become enabled.",
+      "The expected terminal event is XWin, but because no precedence between XWin and Tie is encoded, Tie may be selected instead."
     ]
   },
   {
