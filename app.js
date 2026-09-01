@@ -37,7 +37,7 @@ b-thread ServiceState:
   },
   {
     id: "incorrect-response-obligation",
-    shortTitle: "Incorrect Response Obligation",
+    shortTitle: "Incorrect Handling of Response Obligations",
     title: "Wrong Implementation of \"For Every X, There Must Be a Corresponding Y\"",
     summary:
       "A sequential b-thread may miss a new occurrence of X while it is still handling the response Y for a previous occurrence.",
@@ -68,7 +68,7 @@ b-thread ProduceMessages:
   },
   {
     id: "missing-priority-priority",
-    shortTitle: "Missing Priority Bug",
+    shortTitle: "Missing Priority Specification",
     title: "Incorrect Event Selection Caused by Missing Priority or Blocking",
     summary:
       "When multiple events are selectable at the same synchronization point, failing to encode the required precedence may allow the wrong event to be selected.",
