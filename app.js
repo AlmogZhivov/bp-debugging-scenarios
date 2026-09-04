@@ -199,10 +199,10 @@ No b-thread:
       "This may indicate a missing producer, an incorrect event name, or obsolete behavioral logic."
     ],
     caveat: [
-      "The event may be produced externally by the environment. Events explicitly defined as external inputs should therefore be excluded from this warning."
+      "The waiting behavior may be intentionally dormant in the analyzed model configuration."
     ],
     finding: "DataReady is waited for but has no known producer.",
-    causes: "missing producer · event-name mismatch · external event not declared"
+    causes: "missing producer · event-name mismatch · obsolete behavioral logic"
   },
   {
     id: "closed-event-dependency-cycle",
@@ -224,16 +224,16 @@ b-thread B:
       "A linter can construct an event-dependency graph and flag a closed component that has no incoming producer."
     ],
     caveat: [
-      "One of the events may be generated externally, or another execution path not shown here may initiate the cycle."
+      "The cycle may be intentionally dormant and enabled only in a different model configuration."
     ],
     finding: "X → Y → X. No internal initiating event was found.",
-    causes: "missing producer · external event not declared · unreachable interaction"
+    causes: "missing producer · incomplete dependency · unreachable interaction"
   },
   {
     id: "ineffective-blocking-rule",
     title: "Ineffective Blocking Rule",
     summary:
-      "A b-thread blocks an event that is never requested and is not known to originate externally.",
+      "A b-thread blocks an event that no behavior in the analyzed model can produce.",
     principle:
       "A blocking requirement should normally constrain an event that can actually occur.",
     code: `b-thread Constraint:
@@ -246,9 +246,9 @@ No b-thread:
       "It may indicate obsolete behavior, a missing producer, or an event-name mismatch."
     ],
     caveat: [
-      "The event may be generated externally or by a component that is not represented in the analyzed model."
+      "The rule may be retained deliberately as a defensive constraint for another model configuration."
     ],
-    finding: "Cancel is blocked but has no known internal or external producer.",
+    finding: "Cancel is blocked but has no known producer in the analyzed model.",
     causes: "obsolete constraint · missing producer · event-name mismatch"
   }
 ];

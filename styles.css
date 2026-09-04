@@ -485,6 +485,25 @@ h3 {
   margin-top: 22px;
 }
 
+.catalog-assumption {
+  max-width: 720px;
+  border-left: 4px solid var(--amber);
+  margin-top: 22px;
+  padding: 14px 16px;
+  background: #fffdf8;
+  color: var(--graphite);
+}
+
+.catalog-assumption strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--amber-dark);
+}
+
+.catalog-assumption p {
+  margin: 0;
+}
+
 .scenario-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
